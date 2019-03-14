@@ -3,7 +3,7 @@ import os
 import pickle as pkl
 
 def usage():
-    print('usage: python pkl2api.py api.txt metadata.pkl data.pkl')
+    print('usage: python3 pkl2api.py api.txt metadata.pkl data.pkl')
     sys.exit(2)
 
 def _main():

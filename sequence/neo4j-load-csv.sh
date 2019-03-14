@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ $# -ne 2 ]; then
+    echo "usage: ./neo4j-load-csv.sh neo4j_username password"
+    exit 2
+fi
+
 CYPHER_BIN="cypher-shell"
 CYPHER_ARGS="-u $1 -p $2"
 

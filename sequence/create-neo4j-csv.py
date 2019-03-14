@@ -50,7 +50,7 @@ def create_graph(folder,samples):
     return rv
 
 def usage():
-    print('usage: python create-neo4j-csv.py sequences/ classes.txt class_name output.csv')
+    print('usage: python3 create-neo4j-csv.py sequences/ classes.txt class_name output.csv')
     sys.exit(2)
 
 def _main():

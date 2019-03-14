@@ -51,15 +51,16 @@ def _main():
         with open(target_hashes,'r') as fr:
             for line in fr:
                 line = line.strip('\n')
-                hashes.append(line)
+                h,c = line.split('\t')
+                hashes.append(h)
 
-            # Create output folders
-            folder = os.path.join(attack_features_path,line)
-            if not os.path.exists(folder):
-                os.makedirs(folder)
-            folder = os.path.join(attack_configs_path,line)
-            if not os.path.exists(folder):
-                os.makedirs(folder)
+                # Create output folders
+                folder = os.path.join(attack_features_path,h)
+                if not os.path.exists(folder):
+                    os.makedirs(folder)
+                folder = os.path.join(attack_configs_path,h)
+                if not os.path.exists(folder):
+                    os.makedirs(folder)
 
         # Get parameters
         neo4j_username = config['sequence']['neo4j_username']
