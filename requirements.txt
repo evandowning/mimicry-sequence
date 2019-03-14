@@ -1,0 +1,2 @@
+configparser>=3.5.0
+neo4jrestclient>=2.1.1
