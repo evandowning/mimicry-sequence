@@ -97,11 +97,6 @@ def _main():
             line = line.strip('\n')
             hashes.append(line)
 
-        # Create output folders
-        folder = os.path.join(attack_features,line)
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-
     # Create arguments for multiprocessing
     args = [(sequences,h,neo4j_username,neo4j_password,attack_features,generations) for h in hashes]
 
