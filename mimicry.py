@@ -50,10 +50,12 @@ def _main():
 
         # Get hashes to perform attack on
         hashes = list()
+        sample = dict()
         with open(target_hashes,'r') as fr:
             for line in fr:
                 line = line.strip('\n')
                 h,c = line.split('\t')
+                sample[h] = c
                 hashes.append(h)
 
                 # Create output folders
@@ -73,15 +75,20 @@ def _main():
         args = [(sequences,h,neo4j_username,neo4j_password,attack_features_path,generations) for h in hashes]
 
         # Perform attack
-        with closing ( Pool(20,maxtasksperchild=1) ) as p:
-            results = p.imap_unordered(sequence.neo4j_mimicry.mimicry_wrapper,args)
+        with open(os.path.join(attack_features_path,'samples.txt'),'w') as fw:
+            with closing ( Pool(20,maxtasksperchild=1) ) as p:
+                results = p.imap_unordered(sequence.neo4j_mimicry.mimicry_wrapper,args)
 
-            for e,r in enumerate(results):
-                sys.stdout.write('Generating attack samples: {0}/{1}\r'.format(e+1,len(args)))
+                for e,r in enumerate(results):
+                    sys.stdout.write('Generating attack samples: {0}/{1}\r'.format(e+1,len(args)))
+                    sys.stdout.flush()
+
+                    # Print out hash to file
+                    for i in range(generations):
+                        fw.write('{0}_{1}\t{2}\n'.format(r,str(i),sample[r]))
+
+                sys.stdout.write('\n')
                 sys.stdout.flush()
-
-            sys.stdout.write('\n')
-            sys.stdout.flush()
 
         # Output config file for patchPE to use
         for h in hashes:

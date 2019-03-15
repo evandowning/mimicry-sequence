@@ -63,12 +63,14 @@ def mimicry(folder,h,neo4j_username,neo4j_password,attack_features,generations):
 
     # Write final attack sequence(s) to folder
     for e,a in enumerate(attack):
-        with open(os.path.join(attack_features,h,str(e)),'w') as fw:
+        with open(os.path.join(attack_features,h+'_'+str(e)),'w') as fw:
             for api in a:
                 fw.write('{0}\n'.format(api))
 
             # Append final api call
             fw.write('{0}\n'.format(seq[-1]))
+
+    return h
 
 def mimicry_wrapper(args):
     return mimicry(*args)
