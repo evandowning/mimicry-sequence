@@ -52,7 +52,7 @@ def create_graph(folder,samples):
     return rv
 
 def usage():
-    print('usage: python3 create-neo4j-csv.py sequences/ classes.txt class_name output.csv')
+    sys.stderr.write('usage: python3 create-neo4j-csv.py sequences/ classes.txt class_name output.csv\n')
     sys.exit(2)
 
 def _main():
@@ -74,12 +74,12 @@ def _main():
             if l == class_name:
                 samples.append(h)
 
-    print('Creating graph...')
+    sys.stdout.write('Creating graph...\n')
 
     # Create structure of graph
     graph = create_graph(folder,samples)
 
-    print('Exporting to CSV files')
+    sys.stdout.write('Exporting to CSV files\n')
 
     # Export sequences to CSV files
     export_graph(graph,output)

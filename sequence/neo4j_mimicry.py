@@ -76,7 +76,7 @@ def mimicry_wrapper(args):
     return mimicry(*args)
 
 def usage():
-    print('usage: python3 neo4j_mimicry.py neo4j_username neo4j_password target_hashes.txt sequences/ attack-features/ n_attack_generations')
+    sys.stderr.write('usage: python3 neo4j_mimicry.py neo4j_username neo4j_password target_hashes.txt sequences/ attack-features/ n_attack_generations\n')
     sys.exit(2)
 
 def _main():

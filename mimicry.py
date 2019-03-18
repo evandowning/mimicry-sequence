@@ -10,7 +10,7 @@ from contextlib import closing
 import sequence.neo4j_mimicry
 
 def usage():
-    print('usage: python3 mimicry.py mimicry.cfg')
+    sys.stderr.write('usage: python3 mimicry.py mimicry.cfg\n')
     sys.exit(2)
 
 def _main():
@@ -37,7 +37,7 @@ def _main():
 
     # Mimicry on sequence
     if config.getboolean('sequence','enable'):
-        print('Running sequence mimicry attack')
+        sys.stdout.write('Running sequence mimicry attack\n')
 
         attack_features_path = os.path.join(attack_features,'api-sequences')
         if not os.path.exists(attack_features_path):
@@ -152,7 +152,7 @@ def _main():
         sys.stdout.write('\n')
         sys.stdout.flush()
 
-        print('================================')
+        sys.stdout.write('================================\n')
 
 if __name__ == '__main__':
     _main()

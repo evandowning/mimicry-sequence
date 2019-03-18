@@ -5,7 +5,7 @@ import os
 import pickle as pkl
 
 def usage():
-    print('usage: python3 pkl2api.py api.txt metadata.pkl data.pkl')
+    sys.stderr.write('usage: python3 pkl2api.py api.txt metadata.pkl data.pkl\n')
     sys.exit(2)
 
 def _main():
@@ -44,8 +44,8 @@ def _main():
             for api in s:
                 if api == 0:
                     continue
-#               print api, api_list[api-1]
-                print(api_list[api-1].split(' ')[1])
+                sys.stdout.write(api_list[api-1].split(' ')[1])
+                sys.stdout.write('\n')
 
 if __name__ == '__main__':
     _main()
