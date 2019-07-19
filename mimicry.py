@@ -24,8 +24,9 @@ def _main():
     config.read(config_fn)
 
     # Get arguments
-    sequences = config['input_options']['sequences']
+    sequence_features = config['input_options']['sequences']
     target_hashes = config['input_options']['target_hashes']
+    preferred_api = config['input_options']['preferred']
     attack_features = config['output_options']['attack_features']
     attack_configs = config['output_options']['attack_configs']
 
@@ -34,6 +35,13 @@ def _main():
         os.mkdir(attack_features)
     if not os.path.exists(attack_configs):
         os.mkdir(attack_configs)
+
+    # Get preferred API calls to insert
+    preferred = list()
+    with open(preferred_api,'r') as fr:
+        for line in fr:
+            line = line.strip('\n')
+            preferred.append(line)
 
     # Mimicry on sequence
     if config.getboolean('sequence','enable'):
@@ -50,12 +58,10 @@ def _main():
 
         # Get hashes to perform attack on
         hashes = list()
-        sample = dict()
         with open(target_hashes,'r') as fr:
             for line in fr:
                 line = line.strip('\n')
                 h,c = line.split('\t')
-                sample[h] = c
                 hashes.append(h)
 
                 # Create output folders
@@ -72,23 +78,18 @@ def _main():
         generations = int(config['sequence']['generations'])
 
         # Create arguments for multiprocessing
-        args = [(sequences,h,neo4j_username,neo4j_password,attack_features_path,generations) for h in hashes]
+        args = [(sequence_features,h,neo4j_username,neo4j_password,attack_features_path,generations,preferred) for h in hashes]
 
         # Perform attack
-        with open(os.path.join(attack_features_path,'samples.txt'),'w') as fw:
-            with closing ( Pool(20,maxtasksperchild=1) ) as p:
-                results = p.imap_unordered(sequence.neo4j_mimicry.mimicry_wrapper,args)
+        with closing ( Pool(20,maxtasksperchild=1) ) as p:
+            results = p.imap_unordered(sequence.neo4j_mimicry.mimicry_wrapper,args)
 
-                for e,r in enumerate(results):
-                    sys.stdout.write('Generating attack samples: {0}/{1}\r'.format(e+1,len(args)))
-                    sys.stdout.flush()
-
-                    # Print out hash to file
-                    for i in range(generations):
-                        fw.write('{0}_{1}\t{2}\n'.format(r,str(i),sample[r]))
-
-                sys.stdout.write('\n')
+            for e,r in enumerate(results):
+                sys.stdout.write('Generating attack samples: {0}/{1}\r'.format(e+1,len(args)))
                 sys.stdout.flush()
+
+            sys.stdout.write('\n')
+            sys.stdout.flush()
 
         # Output config file for patchPE to use
         for h in hashes:
