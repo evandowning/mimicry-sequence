@@ -6,7 +6,7 @@ Implements mimicry attack for sequence-based features
 
 ## Clone repo
 ```
-$ git clone git@github.com:evandowning/mimicry-sequence.git
+$ git clone --recurse-submodules git@github.com:evandowning/model-api-sequence.git
 ```
 
 ## Install dependencies

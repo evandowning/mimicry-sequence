@@ -141,7 +141,7 @@ def _main():
                 attack_config = os.path.join(attack_configs_path,h,attack+'.cfg')
                 with open(attack_config,'w') as fw:
                     for k,v in shells.items():
-                        fw.write('[shellcode_{0}]\n'.format(k))
+                        fw.write('[shellcode_{0}]\n'.format(k.lower()))
                         fw.write('target_addr = (\n')
 
                         for k2,v2 in v.items():

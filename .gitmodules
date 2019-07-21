@@ -1,0 +1,3 @@
+[submodule "cuckoo-diff"]
+	path = cuckoo-diff
+	url = https://github.com/evandowning/cuckoo-diff.git
