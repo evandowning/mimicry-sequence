@@ -2,7 +2,7 @@
 Implements mimicry attack for sequence-based features
 
 ## Requirements
-  * Debian 9 64-bit
+  * Debian 10 64-bit
 
 ## Clone repo
 ```
