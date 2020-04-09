@@ -21,7 +21,7 @@ echo 'deb https://debian.neo4j.org/repo stable/' | sudo tee -a /etc/apt/sources.
 apt update
 apt install -y neo4j=1:3.5.2
 
-# Install python3.5
-apt install -y python3.5
+# Install python3
+apt install -y python3.7
 apt install -y python3-pip
 pip3 install -r requirements.txt
