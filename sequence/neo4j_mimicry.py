@@ -77,6 +77,10 @@ def mimicry(folder,h,neo4j_username,neo4j_password,attack_features,generations,p
             # Cache result
             cache[key] = result
 
+        # If there is no result, continue
+        if len(result) == 0:
+            continue
+
         # From result, extend paths
         # Randomly select result to force diversity
         for a in range(len(attack)):
@@ -92,7 +96,7 @@ def mimicry(folder,h,neo4j_username,neo4j_password,attack_features,generations,p
 
     # Write final attack sequence(s) to folder
     for e,a in enumerate(attack):
-        with open(os.path.join(attack_features,h,str(e)),'w') as fw:
+        with open(os.path.join(attack_features,h+'_'+str(e)),'w') as fw:
             for api in a.split(';'):
                 fw.write('{0}\n'.format(api))
 

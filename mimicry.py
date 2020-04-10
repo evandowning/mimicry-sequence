@@ -66,8 +66,6 @@ def _main():
 
                 # Create output folders
                 folder = os.path.join(attack_features_path,h)
-                if not os.path.exists(folder):
-                    os.makedirs(folder)
                 folder = os.path.join(attack_configs_path,h)
                 if not os.path.exists(folder):
                     os.makedirs(folder)
@@ -90,6 +88,10 @@ def _main():
 
             sys.stdout.write('\n')
             sys.stdout.flush()
+        #TODO - debugging
+#       for a in args:
+#           sequence.neo4j_mimicry.mimicry_wrapper(a)
+#           break
 
         # Output config file for patchPE to use
         for h in hashes:
