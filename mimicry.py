@@ -95,13 +95,17 @@ def _main():
 
         # Output config file for patchPE to use
         for h in hashes:
-            # For each attack created for this sample
-            for e,attack in enumerate(os.listdir(os.path.join(attack_features_path,h))):
+            # Get number of generated attacks
+            attack_files = os.listdir(attack_features_path)
+            generated = [f[-1] for f in attack_files if f[:len(h)] == h]
 
-                sys.stdout.write('Writing configs for attacks: {0}/{1}\r'.format(e+1,generations))
+            # For each attack created for this sample
+            for e,attack in enumerate(generated):
+
+                sys.stdout.write('Writing configs for attacks: {0}/{1}\r'.format(e+1,len(generated)))
                 sys.stdout.flush()
 
-                attack_path = os.path.join(attack_features_path,h,attack)
+                attack_path = os.path.join(attack_features_path,h+'_'+attack)
 
                 # Dictionary to hold calls to insert
                 shells = dict()
