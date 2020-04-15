@@ -22,6 +22,6 @@ apt update
 apt install -y neo4j=1:3.5.2
 
 # Install python3
-apt install -y python3.7
+apt install -y python3.5
 apt install -y python3-pip
 pip3 install -r requirements.txt
