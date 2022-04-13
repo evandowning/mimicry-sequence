@@ -88,16 +88,12 @@ def _main():
 
             sys.stdout.write('\n')
             sys.stdout.flush()
-        #TODO - debugging
-#       for a in args:
-#           sequence.neo4j_mimicry.mimicry_wrapper(a)
-#           break
 
         # Output config file for patchPE to use
         for h in hashes:
             # Get number of generated attacks
             attack_files = os.listdir(attack_features_path)
-            generated = [f[-1] for f in attack_files if f[:len(h)] == h]
+            generated = [f.split('_')[-1] for f in attack_files if f[:len(h)] == h]
 
             # For each attack created for this sample
             for e,attack in enumerate(generated):
