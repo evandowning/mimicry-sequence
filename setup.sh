@@ -16,8 +16,8 @@ apt update
 
 # Install neo4j - https://debian.neo4j.org/
 apt install -y wget apt-transport-https ca-certificates
-wget -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -
-echo 'deb https://debian.neo4j.org/repo stable/' | sudo tee -a /etc/apt/sources.list.d/neo4j.list
+wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo apt-key add -
+echo 'deb https://debian.neo4j.com stable 3.5' | sudo tee -a /etc/apt/sources.list.d/neo4j.list
 apt update
 apt install -y neo4j=1:3.5.2
 
